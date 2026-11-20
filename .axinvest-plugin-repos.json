@@ -2,5 +2,7 @@
   "owner": "polite0803",
   "repo": "axinvest-plugin-opc-security",
   "plugin": "opc-security",
+  "rustVersion": "3.0.1",
+  "pluginVersion": "1.0.0",
   "releaseManifestUrl": "https://github.com/polite0803/axinvest-plugin-opc-security/releases/latest/download/release.json"
 }

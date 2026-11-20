@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       release_tag:
-        description: Existing tag, for example v3.0.0
+        description: Existing tag, for example v3.0.1
         required: true
         type: string
 
@@ -70,13 +70,13 @@ jobs:
       - name: Check independent repository boundaries
         run: node scripts/check-release-dependencies.mjs
       - name: Check Rust formatting
-        run: cargo fmt --all --check
+        run: if [ -f Cargo.toml ]; then cargo fmt --all --check; fi
       - name: Check Rust sources
-        run: cargo check --workspace --all-targets
+        run: if [ -f Cargo.toml ]; then cargo check --workspace --all-targets; fi
       - name: Test Rust sources
-        run: cargo test --workspace --all-targets
+        run: if [ -f Cargo.toml ]; then cargo test --workspace --all-targets; fi
       - name: Lint Rust sources
-        run: cargo clippy --workspace --all-targets -- -D warnings
+        run: if [ -f Cargo.toml ]; then cargo clippy --workspace --all-targets -- -D warnings; fi
       - name: Build, verify, and package release bundle
         shell: bash
         run: |

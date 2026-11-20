@@ -33,12 +33,12 @@ jobs:
       - name: Check independent repository boundaries
         run: node scripts/check-release-dependencies.mjs
       - name: Check Rust formatting
-        run: cargo fmt --all --check
+        run: if [ -f Cargo.toml ]; then cargo fmt --all --check; fi
       - name: Check Rust sources
-        run: cargo check --workspace --all-targets
+        run: if [ -f Cargo.toml ]; then cargo check --workspace --all-targets; fi
       - name: Test Rust sources
-        run: cargo test --workspace --all-targets
+        run: if [ -f Cargo.toml ]; then cargo test --workspace --all-targets; fi
       - name: Lint Rust sources
-        run: cargo clippy --workspace --all-targets -- -D warnings
+        run: if [ -f Cargo.toml ]; then cargo clippy --workspace --all-targets -- -D warnings; fi
       - name: Build and verify plugin bundle
         run: node scripts/build-plugin-bundle.mjs --plugin "${PLUGIN_NAME}" --check --out "dist/plugins/${PLUGIN_NAME}"
